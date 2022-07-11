@@ -1,4 +1,4 @@
-export function calculateIntersection(orderTime1, orderTime2) {
+ function calculateIntersection(orderTime1, orderTime2) {
   
  
   //TODO calculer l'intersection
@@ -8,3 +8,5 @@ export function calculateIntersection(orderTime1, orderTime2) {
 
   return 'ok';
 }
+
+module.exports= calculateIntersection;
