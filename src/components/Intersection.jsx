@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
-import { calculateIntersection } from '../lib/calculate.intersection';
+import calculateIntersection from '../lib/calculate.intersection';
 
 function Intersection() {
   const [mealTime, setMealTime] = useState({ start: '', end: '' });
   const [coffeeTime, setCoffeeTime] = useState({ start: '', end: '' });
-
-  console.log('mealTime :', mealTime)
+  const [results, setResults] = useState('');
+  const handleClick = (e) => {
+    e.preventDefault();
+    console.log('intersection', calculateIntersection(mealTime, coffeeTime));
+    setResults(calculateIntersection(mealTime, coffeeTime));
+  };
   return (
     <div className='container'>
       <h1>Intersection</h1>
@@ -15,13 +19,15 @@ function Intersection() {
           <input
             type='time'
             id='mealOrderStart'
-            onChange={(e) => setMealTime({...mealTime, start: e.target.value})}
+            onChange={(e) =>
+              setMealTime({ ...mealTime, start: e.target.value })
+            }
           />
           <label htmlFor='mealOrderEnd'>Meal order ends at :</label>
           <input
             type='time'
             id='mealOrderEnd'
-            onChange={(e) => setMealTime({...mealTime, end: e.target.value})}
+            onChange={(e) => setMealTime({ ...mealTime, end: e.target.value })}
           />
         </div>
         <div className='interval-container'>
@@ -29,19 +35,25 @@ function Intersection() {
           <input
             type='time'
             id='cofeeOrderStart'
-            onChange={(e) => setCoffeeTime({...coffeeTime, start: e.target.value})}
+            onChange={(e) =>
+              setCoffeeTime({ ...coffeeTime, start: e.target.value })
+            }
           />
           <label htmlFor='cofeeOrderEnd'>Meal order ends at :</label>
           <input
             type='time'
             id='cofeeOrderEnd'
-            onChange={(e) => setCoffeeTime({...coffeeTime, end: e.target.value})}
+            onChange={(e) =>
+              setCoffeeTime({ ...coffeeTime, end: e.target.value })
+            }
           />
         </div>
 
-        <button onClick={()=>calculateIntersection(mealTime,coffeeTime)}>Calculate intersection</button>
+        <button onClick={handleClick}>Calculate intersection</button>
       </form>
-      <div> Result is : </div>
+      <div>
+        Result is : {results.start ? `${results.start} - ${results.end}` : results}
+      </div>
     </div>
   );
 }

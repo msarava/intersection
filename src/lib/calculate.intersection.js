@@ -1,3 +1,4 @@
+
 function timeToFloat(TimeString) {
   return (
     parseInt(TimeString.split(':')[0]) + parseInt(TimeString.split(':')[1]) / 60
